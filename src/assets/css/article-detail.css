@@ -1,0 +1,419 @@
+.article-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.article-detail__body {
+    padding: 70px 35px 30px 85px;
+}
+span {
+    font-size: 32px;
+}
+.article-detail__main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 70px;
+}
+.article-detail__share {
+    display: flex;
+    flex-direction: column;
+    font-size: 30px;
+    color: #9A9A9A;
+    a {
+        color: #9A9A9A;
+    }
+
+}
+.article-detail__share p:first-of-type {
+    margin: 70px 0 30px 0;
+    text-decoration: underline;
+    text-underline-offset: 20px;
+}
+
+.article-detail__content {
+    width: 55%;
+    margin: 60px auto;
+}
+.article-detail-text {
+    display: flex;
+    flex-direction: column;
+}
+.article-detail-text {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    font-size: 32px;
+}
+.article-detail__popular {
+    width: 510px;
+}
+.similar {
+    padding: 70px 35px 30px 85px;
+}
+.similar-container {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+.page-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+    background: radial-gradient(circle at 20% 30%, #1e1a2f, #0a0812);
+}
+
+.demo-message {
+    max-width: 620px;
+    text-align: center;
+    background: rgba(48, 49, 89, 0.2);
+    backdrop-filter: blur(2px);
+    padding: 2rem;
+    border-left: 4px solid #E46C56;
+    font-family: 'Red Hat Mono', monospace;
+    color: #e2dbe6;
+}
+
+.demo-message h2 {
+    font-family: 'Major Mono Display', monospace;
+    letter-spacing: -1px;
+    font-size: 2rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #E46C56;
+    text-shadow: 2px 2px 0 #303159;
+    margin-bottom: 0.75rem;
+}
+
+.demo-message p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+/* --------------------------------------------------------- */
+/* ГРАНЖ-ФУТЕР — основной блок */
+/* --------------------------------------------------------- */
+.grunge-footer {
+    background-color: #303159;    /* основной глубокий инди-синий фон */
+    color: #f0ede8;
+    position: relative;
+    border-top: 5px solid #E46C56;
+    font-family: 'Red Hat Mono', 'Source Code Pro', monospace;
+    overflow-x: hidden;
+}
+
+/* Текстура гранж — наложение зерна, царапин и "шума" */
+.grunge-footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjUiIG51bU9jdGF2ZXM9IjMiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjZikiIG9wYWNpdHk9IjAuMTgiLz48L3N2Zz4=');
+    background-repeat: repeat;
+    opacity: 0.2;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+}
+
+/* Наложение грубой “краски / царапин” — дополнительный слой */
+.grunge-footer::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(45deg, rgba(0,0,0,0.02) 0px, rgba(0,0,0,0.02) 2px, transparent 2px, transparent 8px);
+    pointer-events: none;
+}
+
+.footer-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 3.2rem 2rem 2.5rem 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* основная сетка футера */
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 2.8rem;
+    border-bottom: 1px dashed rgba(228, 108, 86, 0.4);
+    padding-bottom: 2rem;
+}
+
+/* Заголовки колонок — гранж-типографика: рваные, чуть кривые, с цветовым акцентом */
+.footer-col h3 {
+    font-family: 'Major Mono Display', 'Courier New', monospace;
+    font-size: 1.35rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin-bottom: 1.4rem;
+    color: #E46C56;
+    position: relative;
+    display: inline-block;
+    background: rgba(0,0,0,0.3);
+    padding: 0 0.25rem;
+    transform: rotate(-0.5deg);
+    border-left: 3px solid #E46C56;
+    padding-left: 0.65rem;
+}
+
+/* Эффект "потрепанной печатной машинки" для ссылок и текста */
+.footer-col p, .footer-col a, .newsletter-text {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    font-family: 'Red Hat Mono', 'Source Code Pro', monospace;
+    font-weight: 400;
+    transition: all 0.2s ease;
+}
+
+.footer-col a {
+    color: #e2dbe6;
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(228, 108, 86, 0.5);
+    display: inline-block;
+    margin-bottom: 0.4rem;
+}
+
+.footer-col a:hover {
+    color: #E46C56;
+    border-bottom-style: solid;
+    letter-spacing: 0.3px;
+    transform: skewX(-1deg);
+}
+
+/* Список без маркеров, но с гранж-символами */
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.footer-col ul li::before {
+    content: "//";
+    color: #E46C56;
+    font-weight: bold;
+    font-size: 0.8rem;
+    opacity: 0.8;
+    letter-spacing: -1px;
+}
+
+/* Спец. блок для инди-рекомендаций — выглядит как перетертый стикер */
+.indie-pick {
+    background: rgba(0, 0, 0, 0.35);
+    padding: 0.9rem 1rem;
+    border-right: 3px solid #E46C56;
+    margin-top: 0.8rem;
+    font-size: 0.8rem;
+    backdrop-filter: blur(1.5px);
+}
+
+.indie-pick strong {
+    color: #E46C56;
+    font-family: 'Major Mono Display', monospace;
+    font-weight: normal;
+    letter-spacing: -0.3px;
+}
+
+/* Форма подписки (новостная рассылка в стиле DIY) */
+.newsletter-form {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.newsletter-form input {
+    flex: 1;
+    background: #1f1d38;
+    border: 1px solid #E46C56;
+    padding: 0.7rem 1rem;
+    font-family: 'Red Hat Mono', monospace;
+    font-size: 0.8rem;
+    color: #fff0e6;
+    outline: none;
+    transition: 0.2s;
+}
+
+.newsletter-form input::placeholder {
+    color: #b9b3cf;
+    font-style: italic;
+    font-size: 0.7rem;
+}
+
+.newsletter-form input:focus {
+    border-color: #fff;
+    background: #2b284b;
+}
+
+.btn-grunge {
+    background: #E46C56;
+    border: none;
+    padding: 0.6rem 1.3rem;
+    font-family: 'Major Mono Display', monospace;
+    font-weight: bold;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #0e0b14;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 2px 2px 0 #1e1b31;
+    transform: rotate(0.2deg);
+}
+
+.btn-grunge:hover {
+    background: #ff846e;
+    box-shadow: 1px 1px 0 #303159;
+    transform: translate(1px, 1px) rotate(-0.2deg);
+}
+
+/* Нижняя линия с копирайтом, соцсетями — гранж-элементы */
+.footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    font-size: 0.7rem;
+    font-family: 'Source Code Pro', monospace;
+    border-top: 1px dashed rgba(228,108,86,0.4);
+    padding-top: 1.8rem;
+}
+
+.copyright {
+    opacity: 0.7;
+    letter-spacing: -0.3px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1.6rem;
+}
+
+.social-icons a {
+    color: #e2dbe6;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-family: monospace;
+    transition: 0.2s;
+    border-bottom: 1px dotted transparent;
+}
+
+.social-icons a:hover {
+    color: #E46C56;
+    border-bottom: 1px solid #E46C56;
+    transform: skewX(-3deg);
+    display: inline-block;
+}
+
+/* Элементы гранж-декора: неровные полосы, пятна */
+.grunge-stamp {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 0.6rem;
+    opacity: 0.15;
+    font-family: monospace;
+    transform: rotate(-6deg);
+    pointer-events: none;
+    white-space: pre;
+    z-index: 1;
+}
+.article-detail-text :deep(h6) {
+    font-size: 26px;
+    margin: 20px 0 30px;
+    color: #fff;
+    font-weight: bold;
+
+}
+.articleTags {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.article-detail-text :deep(p) {
+    margin: 0 0 18px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.article-detail-text :deep(.reg-text) {
+    color: #9A9A9A;
+    margin: 0 0 20px;
+    line-height: 1.7;
+}
+
+.article-detail-text :deep(img) {
+    margin: 20px 0 30px;
+    width: 80%;
+    max-width: 100%;
+    display: block;
+}
+
+.article-detail-text :deep(h3) {
+    margin: 32px 0 14px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.article-detail-text :deep(strong) {
+    color: #fff;
+}
+
+.article-detail-text :deep(em) {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Адаптивность */
+@media (max-width: 700px) {
+    .footer-container {
+        padding: 2rem 1.2rem;
+    }
+    .footer-grid {
+        gap: 1.8rem;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .newsletter-form {
+        flex-direction: column;
+    }
+    .btn-grunge {
+        align-self: flex-start;
+    }
+}
+
+/* Эффект "разорванной кромки" сверху футера — гранж */
+.grunge-footer .footer-container::before {
+    content: "✂︎ ✂︎ ✂︎";
+    position: absolute;
+    top: -18px;
+    left: 5%;
+    font-size: 14px;
+    letter-spacing: 5px;
+    color: #E46C56;
+    background: #303159;
+    padding: 0 10px;
+    font-family: monospace;
+    opacity: 0.7;
+    transform: rotate(-1deg);
+}
