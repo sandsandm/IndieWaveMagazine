@@ -9,6 +9,16 @@ import TagChip from '@/components/TagChip.vue'
 const route = useRoute()
 const store = useArticlesStore()
 
+// Функция для правильного пути к изображению (такая же, как в ArticleCard)
+const getImageUrl = (imagePath) => {
+  if (!imagePath) return ''
+  if (imagePath.startsWith('http') || imagePath.startsWith('/IndieWaveMagazine/')) {
+    return imagePath
+  }
+  const base = import.meta.env.BASE_URL
+  return `${base}${imagePath}`
+}
+
 const article = computed(() =>
   store.articles.find((a) => a.id === Number(route.params.id))
 )
@@ -17,7 +27,7 @@ const similarArticles = computed(() => {
   if (!article.value) return []
   return store.articles
     .filter((a) => a.id !== article.value.id)
-    .filter((a) => a.tags.some((t) => article.value.tags.includes(t)))
+    .filter((a) => a.tags?.some((t) => article.value.tags?.includes(t)))
     .slice(0, 4)
 })
 
@@ -25,11 +35,10 @@ const isLiked = computed(() =>
   store.likedIds.includes(Number(route.params.id))
 )
 </script>
-
 <template>
   <div v-if="article" class="article-detail">
     <section class="first-section gradient">
-      <img :src="article.coverImage" class="article-cover" />
+      <img :src="getImageUrl(article.coverImage)" class="article-cover" />
     </section>
     <section class="article-detail__body">
       <div class="article-detail__meta">

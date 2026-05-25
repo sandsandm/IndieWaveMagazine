@@ -1,27 +1,46 @@
 <script setup>
-
 // props — это параметры, которые мы передаём в компонент снаружи
-// defineProps не нужно импортировать — это макрос Vue, доступен всегда
 const props = defineProps({
-    article: {
-      type: Object,
-      required: true,
-    },
-    //размер карточки
-    size: {
-      type: String,
-      default: 'medium',
-      validator: (value) => ['small', 'medium', 'large', 'full'].includes(value),
-    },
-    showCover: { type: Boolean, default: true },
-    showGenre: { type: Boolean, default: true },
-    showDate: { type: Boolean, default: true },
-    showPreview: { type: Boolean, default: true },
-    showTags: { type: Boolean, default: true },
-    showAuthor: { type: Boolean, default: false },
-    showPreview: { type: Boolean, default: false },
-  })
+  article: {
+    type: Object,
+    required: true,
+  },
+  size: {
+    type: String,
+    default: 'medium',
+    validator: (value) => ['small', 'medium', 'large', 'full'].includes(value),
+  },
+  showCover: { type: Boolean, default: true },
+  showGenre: { type: Boolean, default: true },
+  showDate: { type: Boolean, default: true },
+  showPreview: { type: Boolean, default: true },
+  showTags: { type: Boolean, default: true },
+  showAuthor: { type: Boolean, default: false },
+  showPreview: { type: Boolean, default: false },
+})
 
+// Функция для правильного пути к изображению
+const getImageUrl = (imagePath) => {
+  if (!imagePath) return ''
+
+  // Если это полный URL или уже правильный путь
+  if (imagePath.startsWith('http') || imagePath.startsWith('/IndieWaveMagazine/')) {
+    return imagePath
+  }
+
+  const base = import.meta.env.BASE_URL
+
+  // Пробуем разные варианты путей
+  const possiblePaths = [
+    `${base}${imagePath}`,           // прямой путь
+    `${base}covers/${imagePath}`,    // в папке covers
+    `${base}images/${imagePath}`,    // в папке images
+    `${base}assets/${imagePath}`,    // в папке assets
+  ]
+
+  // Возвращаем первый путь (браузер сам попробует остальные при ошибке)
+  return possiblePaths[0]
+}
 </script>
 
 <template>
@@ -29,8 +48,8 @@ const props = defineProps({
   <div :class="['article-card', `article-card--${size}`]">
   <!-- Обложка -->
     <img
-      v-if="showCover && article.coverImage"
-      :src="article.coverImage"
+      v-if="showCover && (article.coverImage || article.image || article.cover)"
+      :src="getImageUrl(article.coverImage || article.image || article.cover)"
       :alt="article.title"
       :class="['article-cover', `article-cover--${size}`]"
     />

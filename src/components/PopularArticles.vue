@@ -10,6 +10,7 @@ const props = defineProps({
     default: 'small',
   },
 })
+
 </script>
 
 <template>

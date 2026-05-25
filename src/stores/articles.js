@@ -1,33 +1,20 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-// Импортируем исходные данные
 import articlesData from '../data/articles.json'
 
 export const useArticlesStore = defineStore('articles', () => {
-  // Базовый путь для GitHub Pages
-  const baseUrl = import.meta.env.BASE_URL // '/IndieWaveMagazine/'
+  const baseUrl = import.meta.env.BASE_URL
 
-  // Обрабатываем изображения при загрузке
   const processedArticles = articlesData.map(article => ({
     ...article,
-    coverImage: `${baseUrl}covers/${article.coverImage}`,
-    // Если есть другие поля с изображениями — тоже обработай
-    // image: `${baseUrl}covers/${article.image}`,
+    //coverImage: `${baseUrl}covers/${article.coverImage}`
   }))
 
-  // state
-  const articles = ref(processedArticles)  // Используем обработанные данные
-
-  // ID понравившихся статей
+  const articles = ref(processedArticles)
   const likedIds = ref([])
-
-  // Реакции
   const reactions = ref([])
-
-  // Текущий язык
   const currentLang = ref('ru')
 
-  // computed
   const featuredArticles = computed(() =>
     articles.value.filter(a => a.featured)
   )
@@ -54,7 +41,6 @@ export const useArticlesStore = defineStore('articles', () => {
     articles.value.filter(a => likedIds.value.includes(a.id))
   )
 
-  // actions
   function toggleLike(articleId) {
     const index = likedIds.value.indexOf(articleId)
     if (index === -1) {
@@ -64,28 +50,26 @@ export const useArticlesStore = defineStore('articles', () => {
     }
   }
 
-  function addReaction(articleId, emoji) {
-    const existing = reactions.value.find(
-      r => r.articleId === articleId && r.emoji === emoji
-    )
-    if (existing) {
-      existing.count++
-    } else {
-      reactions.value.push({ articleId, emoji, count: 1 })
-    }
-  }
 
   function getArticleById(id) {
     return articles.value.find(a => a.id === Number(id))
   }
 
+  //нереализовано
   function toggleLang() {
     currentLang.value = currentLang.value === 'ru' ? 'en' : 'ru'
   }
 
   return {
-    articles, likedIds, reactions, currentLang,
-    featuredArticles, newArticles, popularArticles, allTags, likedArticles,
-    toggleLike, addReaction, getArticleById, toggleLang,
+    articles,
+    likedIds,
+    reactions,
+    currentLang,
+    featuredArticles,
+    newArticles,
+    popularArticles,
+    allTags,
+    likedArticles,
+    toggleLike,
   }
 })
