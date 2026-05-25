@@ -1,5 +1,5 @@
 <script setup>
-import ArticlesCard from '@/components/ArticlesCard.vue'
+import ArticleCard from '@/components/ArticleCard.vue'
 import { useArticlesStore } from '@/stores/articles'
 
 const store = useArticlesStore()
@@ -16,7 +16,7 @@ const props = defineProps({
   <div class="popular-articles_articles">
     <h5 class="ibm-sans-bold">POPULAR ARTICLES</h5>
     <div class="pop-articles__line"/>
-    <ArticlesCard
+    <ArticleCard
       v-for="article in store.popularArticles"
       :key="article.id"
       :article="article"
@@ -28,6 +28,12 @@ const props = defineProps({
 </template>
 
 <style scoped>
+@media (min-width: 1200px) {
+  h5 {
+    margin: 3.4rem 0 0 0 ;
+
+  }
+}
 h5 {
   margin: 3.4rem 0 0 0 ;
   color: #9A9A9A;
@@ -41,5 +47,9 @@ h5 {
     border-bottom: #858585 3px solid;
     margin: 15px 0 30px 0;
   }
-
+@media (max-width: 992px) {
+  .popular-articles_articles {
+    margin: 0 0 30px 0;
+  }
+}
 </style>

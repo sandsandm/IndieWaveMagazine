@@ -1,18 +1,22 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useArticlesStore } from '../stores/articles'
-import ArticleCard from '@/components/ArticlesCard.vue'
+import ArticleCard from '@/components/ArticleCard.vue'
 
 const store = useArticlesStore()
-const searchQuery = ref('')
 const selectedTags = ref([])
 const dateFrom = ref('')
 const dateTo = ref('')
 const visibleCount = ref(8) // Начальное количество статей
 const showAllTags = ref(false) // Флаг для отображения всех тегов
 const initialTagsLimit = 10
-
 import { watch } from 'vue'
+
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+const searchQuery = ref(route.query.q || '')
+
 import SubscriptionForm from '@/components/SubscriptionForm.vue'
 watch([searchQuery, selectedTags, dateFrom, dateTo], () => {
   resetAndLoadMore()
@@ -26,9 +30,7 @@ const results = computed(() => {
     const q = searchQuery.value.toLowerCase()
     filtered = filtered.filter(
       a =>
-        a.title.toLowerCase().includes(q) ||
-        a.previewText.toLowerCase().includes(q) ||
-        a.content.toLowerCase().includes(q)
+        a.title.toLowerCase().includes(q)
     )
   }
 
@@ -47,16 +49,14 @@ const results = computed(() => {
     filtered = filtered.filter(a => new Date(a.date) <= new Date(dateTo.value))
   }
 
-  // ← ВОТ ЭТОГО НЕ БЫЛО: сортировка
   return sortArticles(filtered)
 })
-//computed
-// Отображаемые статьи (ограниченное количество)
+
 const displayedArticles = computed(() => {
   return results.value.slice(0, visibleCount.value)
 })
 
-// Флаг, показывать ли кнопку "Загрузить еще"
+// "Загрузить еще"
 const hasMore = computed(() => {
   return visibleCount.value < results.value.length
 })
@@ -78,12 +78,12 @@ const hasMoreTags = computed(() => {
 
 // Функция загрузки еще статей
 function loadMore() {
-  visibleCount.value += 8
+  visibleCount.value += 6
 }
 
 // Сброс количества при изменении фильтров
 function resetAndLoadMore() {
-  visibleCount.value = 8
+  visibleCount.value = 6
 }
 // Функция показа всех тегов
 function showMoreTags() {
@@ -176,7 +176,7 @@ const sortBy = ref('date')
             <option value="popular-asc">Sort by popularity (least liked)</option>
           </select>
         </div>
-        <p class="ibm-sans-bold">shown: {{ displayedArticles.length }} from {{ results.length }} articles</p>
+        <p class="shown ibm-sans-bold">shown: {{ displayedArticles.length }} from {{ results.length }} articles</p>
 
         <div class="search-results">
           <ArticleCard
@@ -193,11 +193,11 @@ const sortBy = ref('date')
           show more
         </button>
 
-        <p v-else-if="results.length > 0" class="ibm-sans-bold">
+        <p v-else-if="results.length > 0" class="ibm-sans-bold p-res">
           You have looked all {{ results.length }} articles
         </p>
 
-        <p v-if="results.length === 0" class="ibm-sans-bold">
+        <p v-if="results.length === 0" class="ibm-sans-bold p-res">
           no articles found :(
         </p>
       </div>

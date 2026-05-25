@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useArticlesStore } from '@/stores/articles'
-import ArticleCard from '@/components/ArticlesCard.vue'
+import ArticleCard from '@/components/ArticleCard.vue'
 import DecadeTimeline from '@/components/DecadeTimeline.vue'
 
 const store = useArticlesStore()
@@ -53,5 +53,15 @@ const filteredArticles = computed(() =>
 }
 .second-section {
   padding: 50px;
+}
+
+@media (max-width: 768px) {
+  .second-section { padding: 30px 20px; }
+  .history-articles { gap: 40px; }
+}
+
+@media (max-width: 480px) {
+  .second-section { padding: 20px 14px; }
+  .history-articles { gap: 25px; }
 }
 </style>

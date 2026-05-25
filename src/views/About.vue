@@ -66,4 +66,30 @@ h3   {
 p {
   font-size: 40px
 }
+@media (max-width: 992px) {
+  .second-section {
+    padding: 80px 50px 60px 50px;
+    gap: 50px;
+  }
+  .abit { min-width: 350px; }
+    p { font-size: 28px; }
+}
+
+@media (max-width: 768px) {
+  .second-section {
+    flex-direction: column;
+    padding: 50px 25px 40px 25px;
+    gap: 30px;
+  }
+  .abit {
+    min-width: unset;
+    width: 100%;
+  }
+  p { font-size: 20px; }
+}
+
+@media (max-width: 480px) {
+  .second-section { padding: 35px 15px 30px 15px; gap: 20px; }
+  p { font-size: 17px; }
+}
 </style>

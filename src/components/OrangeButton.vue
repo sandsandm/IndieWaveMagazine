@@ -13,10 +13,15 @@ const props = defineProps({
 </template>
 
 <style scoped>
+@media (min-width: 1200px) {
+  .orange-btn {
+    min-width: 300px;
+    height: 68px;
+  }
+}
 .orange-btn {
-  min-width: 300px;
   width: fit-content;
-  height: 68px;
+  padding: 12px;
   border-radius: 145px;
   border: none;
   background-color: #E46C56;

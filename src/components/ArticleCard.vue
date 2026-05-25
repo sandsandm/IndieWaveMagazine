@@ -69,9 +69,17 @@ const props = defineProps({
   display: flex;
 
 }
-.article-card-link {
-  width: fit-content;
+@media (min-width: 1200px) {
+  .article-card-link {
+    width: fit-content;
+  }
 }
+@media (max-width: 1200px) {
+  .article-card-link {
+  max-width: 220px;
+  }
+}
+
 /*LARGE*/
 /*используется в editors choice only*/
 .article-card--large {
@@ -189,5 +197,97 @@ const props = defineProps({
 .article-date {
   font-size: 15px;
   text-transform: uppercase;
+}
+
+@media (max-width: 992px) {
+  .article-card--large {
+    width: 300px;
+    height: auto;
+  }
+  .article-cover--large {
+    max-width: 300px;
+    height: 270px;
+  }
+  .article-card--full {
+    width: 100%;
+  }
+  .article-cover--full {
+    max-width: 280px;
+    height: 260px;
+  }
+  .article-card-content--full .article-title {
+    font-size: 44px;
+  }
+  .article-card-content--full .article-genre { font-size: 26px; }
+  .article-card-content--full .article-preview { font-size: 20px; }
+  .article-card-content--full .article-date { font-size: 20px; }
+}
+
+@media (max-width: 768px) {
+  /* Large — уменьшаем */
+  .article-card--large {
+    width: 240px;
+    height: auto;
+  }
+  .article-cover--large {
+    max-width: 240px;
+    height: 210px;
+    border-radius: 24px;
+  }
+
+  /* Medium — уменьшаем */
+  .article-card--medium { width: 100%; }
+  .article-cover--medium {
+    max-width: 100%;
+    height: 220px;
+    border-radius: 24px;
+  }
+
+  /* Full — переходим в колонку */
+  .article-card--full {
+    flex-direction: column;
+  }
+  .article-cover--full {
+    max-width: 100%;
+    width: 100%;
+    height: 220px;
+    margin: 0 0 14px 0;
+    border-radius: 24px;
+  }
+  .article-card-content--full .article-title {
+    font-size: 28px;
+  }
+  .article-card-content--full .article-genre { font-size: 18px; }
+  .article-card-content--full .article-preview { font-size: 16px; }
+  .article-card-content--full .article-date { font-size: 15px; }
+
+  /* Small — совсем компактный */
+  .article-card--small { height: auto; min-height: 90px; }
+  .article-cover--small {
+    max-width: 80px;
+    height: 80px;
+    border-radius: 14px;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .article-card--large {
+    width: 180px;
+  }
+  .article-cover--large {
+    max-width: 180px;
+    height: 160px;
+    border-radius: 18px;
+  }
+  .article-card--medium {
+    width: 317px;
+  }
+  .article-cover--medium {
+    height: 190px; border-radius: 18px;
+  }
+  .article-card-content--full .article-title {
+    font-size: 22px;
+  }
 }
 </style>

@@ -41,8 +41,11 @@ const router = createRouter({
     },
   ],
   scrollBehavior(to, from, savedPosition) {
-    // Всегда скроллить наверх страницы
-    return { top: 0, behavior: 'smooth' }
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0, left: 0, behavior: 'smooth' }
+    }
   }
 })
 

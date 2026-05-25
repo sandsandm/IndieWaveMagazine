@@ -1,31 +1,63 @@
 <script setup>
-import ArticlesCard from '@/components/ArticlesCard.vue'
+import { ref, onUnmounted } from 'vue'
+import ArticleCard from '@/components/ArticleCard.vue'
 import { useArticlesStore } from '@/stores/articles'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 
 const store = useArticlesStore()
-
 const galleryRef = ref(null)
+
+let targetSpeed = 0
+let animationId = null
+let isHovering = false
 
 function onMouseMove(event) {
   const gallery = galleryRef.value
   if (!gallery) return
-
   const rect = gallery.getBoundingClientRect()
-  // Положение мыши относительно центра галереи (от -0.5 до +0.5)
   const center = (event.clientX - rect.left) / rect.width - 0.5
-  // Умножаем на коэффициент скорости
-  const speed = center * 600
-
-  gallery.scrollLeft += speed
+  targetSpeed = center * 600
 }
+
+function smoothScroll() {
+  const gallery = galleryRef.value
+  if (!gallery) return
+  gallery.scrollLeft += targetSpeed * 0.5
+
+  if (Math.abs(targetSpeed) < 0.9 && !isHovering) {
+    animationId = null
+    return
+  }
+  animationId = requestAnimationFrame(smoothScroll)
+}
+
+function onMouseEnter() {
+  isHovering = true
+  if (!animationId) {
+    animationId = requestAnimationFrame(smoothScroll)
+  }
+}
+
+function onMouseLeave() {
+  isHovering = false
+}
+
+onUnmounted(() => {
+  if (animationId) cancelAnimationFrame(animationId)
+})
 </script>
 
 <template>
   <div class="choice__content">
     <h4 class="ibm-mono">EDITORS' CHOICE</h4>
-    <div ref="galleryRef" class="choice__gallery" @mousemove="onMouseMove">
-      <ArticlesCard
+    <div
+      ref="galleryRef"
+      class="choice__gallery"
+      @mouseenter="onMouseEnter"
+      @mousemove="onMouseMove"
+      @mouseleave="onMouseLeave"
+    >
+      <ArticleCard
         v-for="article in store.featuredArticles"
         :key="article.id"
         :article="article"
@@ -43,14 +75,25 @@ function onMouseMove(event) {
   justify-content: center;
   align-items: center;
 }
-
+@media (min-width: 1200px) {
+  .choice__gallery {
+    display: grid;
+    column-gap: 20px;
+    grid-template-columns: repeat(9, 400px);
+  }
+}
+@media (max-width: 1200px) {
+  .choice__gallery {
+    display: grid;
+    column-gap: 20px;
+    grid-template-columns: repeat(9, 300px);
+  }
+}
 .choice__gallery {
   display: grid;
-  column-gap: 20px;
-  grid-template-columns: repeat(9, 400px);
   flex-direction: row;
   gap: 20px;
-  height: 460px;
+  max-height: 460px;
   margin: 20px 0;
   max-width: 90%;
   overflow-x: auto;
@@ -59,6 +102,7 @@ function onMouseMove(event) {
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  padding: 15px;
 }
 
 .choice__gallery :deep(.article-card):hover {
@@ -69,5 +113,11 @@ function onMouseMove(event) {
 
 .choice__gallery :deep(.article-card):active {
   transform: scale(1.02);
+}
+@media (max-width: 768px) {
+  .choice__gallery {
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 </style>

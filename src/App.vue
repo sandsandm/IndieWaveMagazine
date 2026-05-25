@@ -2,6 +2,8 @@
 import { RouterLink, RouterView } from 'vue-router'
 import MarqueeText from '@/components/marqueeText.vue'
 import Footer from '@/components/footer.vue'
+
+
 </script>
 <template>
   <div class="container">

@@ -68,4 +68,32 @@ div > label {
   font-size: 36px;
   margin: 10px auto;
 }
+@media (max-width: 992px) {
+  .subscribe {
+    padding: 12vh 12vw 10vh 12vw;
+    display: flex;
+    flex-direction: column;
+  }
+  .input-email { width: 100%; max-width: 600px; }
+}
+
+@media (max-width: 768px) {
+  .subscribe { padding: 10vh 6vw 8vh 6vw; }
+  .input-email {
+    width: 100%;
+    max-width: 100%;
+    font-size: 18px;
+  }
+  .drop { font-size: 24px; }
+  input::placeholder { font-size: 18px; }
+  input { font-size: 18px; }
+}
+
+@media (max-width: 480px) {
+  .subscribe { padding: 8vh 4vw 7vh 4vw; }
+  .drop { font-size: 20px; }
+  .input-email { height: 44px; }
+  input::placeholder { font-size: 15px; }
+  input { font-size: 15px; }
+}
 </style>

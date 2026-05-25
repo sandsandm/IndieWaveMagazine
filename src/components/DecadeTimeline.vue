@@ -102,4 +102,20 @@ function onInput(event) {
   background: #6a7ac8;
   cursor: pointer;
 }
+@media (max-width: 992px) {
+  .timeline__label { font-size: 28px; }
+  .timeline__label.active { font-size: 34px; }
+}
+
+@media (max-width: 768px) {
+  .timeline { padding: 24px 0; }
+  .timeline__label { font-size: 18px; }
+  .timeline__label.active { font-size: 22px; }
+}
+
+@media (max-width: 480px) {
+  .timeline__labels { gap: 0; }
+  .timeline__label { font-size: 13px; }
+  .timeline__label.active { font-size: 15px; }
+}
 </style>

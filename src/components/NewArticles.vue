@@ -1,5 +1,5 @@
 <script setup>
-import ArticlesCard from '@/components/ArticlesCard.vue'
+import ArticleCard from '@/components/ArticleCard.vue'
 import { useArticlesStore } from '@/stores/articles'
 
 const store = useArticlesStore()
@@ -15,7 +15,7 @@ const props = defineProps({
 <template>
 
   <div class="new-articles_articles">
-    <ArticlesCard
+    <ArticleCard
       v-for="article in store.newArticles"
       :key="article.id"
       :article="article"
@@ -29,8 +29,7 @@ const props = defineProps({
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   gap: 3rem;
-  width: 100%;
-  /* убираем min-height, если он не нужен */
+  max-width: 100%;
 }
 
 /* Для среднего размера карточек можно уменьшить отступы */

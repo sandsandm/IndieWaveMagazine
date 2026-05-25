@@ -1,45 +1,68 @@
 <script setup>
+import { ref, computed, watch } from 'vue'
+
+import { useRouter } from 'vue-router'
 import { useArticlesStore } from '@/stores/articles'
+const store = useArticlesStore()
 import EditorsChoice from '@/components/EditorsChoice.vue'
 import PopularArticles from '@/components/PopularArticles.vue'
 import NewArticles from '@/components/NewArticles.vue'
-import TagChip from '@/components/TagChip.vue'
 import MarqueeText from '@/components/marqueeText.vue'
 import OrangeButton from '@/components/OrangeButton.vue'
 import SubscriptionForm from '@/components/SubscriptionForm.vue'
 import TagCloud from '@/components/TagCloud.vue'
-const store = useArticlesStore()
+
+
+const router = useRouter()
+const searchQuery = ref('')
+
+function goToSearch() {
+  const q = searchQuery.value.trim()
+  if (q) {
+    router.push({ path: '/articles', query: { q } })
+  }
+}
+import AuthModal from '@/components/AuthModule.vue'
+const showAuth = ref(false)
+
+// Проверяем, есть ли залогиненный пользователь
+const currentUser = computed(() => {
+  return JSON.parse(localStorage.getItem('currentUser') || 'null')
+})
+
+const isLoggedIn = computed(() => currentUser.value !== null)
 </script>
 <template>
   <section class="main">
     <div class="main-content">
       <div class="main-top">
         <div class="main__search">
-          <button class="main__search-btn">
-            <a href="#"> <img src="@/assets/images/search.png" alt="" /> </a>
+          <button class="main__search-btn" @click="goToSearch">
+            <img src="@/assets/images/search.png" alt="Search" />
           </button>
           <input
+            v-model="searchQuery"
             class="main__search-input"
             type="text"
             name="search"
             id="main-search"
             placeholder="Search"
+            @keyup.enter="goToSearch"
           />
         </div>
         <div class="profile">
-          <RouterLink to="/account">
+          <RouterLink v-if="isLoggedIn" to="/account" class="login-link">
             <img src="@/assets/images/LOGIN.png" alt="" />
           </RouterLink>
-          <div class="roboto">
-            <a class="language-selected" href="#"> ENG </a>
-            /
-            <a class="language-unselected" href="#"> РУ </a>
-          </div>
+          <a v-else href="#" @click.prevent="showAuth = true">
+            <img src="@/assets/images/LOGIN.png" alt="" />
+          </a>
+          <AuthModal v-if="showAuth" @close="showAuth = false" />
         </div>
       </div>
       <div class="main-bottom ibm-mono">
         <h1>INDIE WAVE MAGAZINE</h1>
-        <img src="@/assets/images/line.png" alt="" />
+        <img class="line-main" src="@/assets/images/line.png" alt="" />
         <h5 class="main__under-title roboto">Stories from a world full of creative</h5>
       </div>
     </div>

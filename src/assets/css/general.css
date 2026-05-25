@@ -216,5 +216,65 @@ nav ul li a:hover{
     align-items: center;
     justify-content: center;
     padding: 1rem 6rem 3rem 11rem;
+    text-align: center;
 }
 
+@media (max-width: 1200px) {
+    h1 { font-size: 80px; }
+    h2 { font-size: 64px; }
+    h3 { font-size: 48px; }
+    h4 { font-size: 36px; }
+
+    nav ul { padding: 0 8%; }
+    nav ul li { font-size: 26px; }
+}
+
+/* --- 992px: планшет горизонтально --- */
+@media (max-width: 992px) {
+    h1 { font-size: 60px; }
+    h2 { font-size: 48px; }
+    h3 { font-size: 36px; }
+    h4 { font-size: 28px; }
+
+    nav { height: 90px; }
+    nav ul { padding: 0 5%; }
+    nav ul li { font-size: 20px; }
+
+    .first-section {
+        padding: 1rem 3rem 2rem 3rem;
+    }
+}
+
+/* --- 768px: планшет вертикально / большой телефон --- */
+@media (max-width: 768px) {
+    h1 { font-size: 44px; }
+    h2 { font-size: 34px; }
+    h3 { font-size: 26px; }
+    h4 { font-size: 22px; }
+    h5 { font-size: 18px; }
+
+    nav { height: 75px; }
+    nav ul { padding: 0 4%; gap: 8px; }
+    nav ul li { font-size: 16px; }
+
+    .first-section {
+        padding: 1rem 1.5rem 2rem 1.5rem;
+    }
+}
+
+/* --- 480px: телефон --- */
+@media (max-width: 480px) {
+    h1 { font-size: 32px; }
+    h2 { font-size: 26px; }
+    h3 { font-size: 22px; }
+    h4 { font-size: 18px; }
+    h5 { font-size: 16px; }
+
+    nav { height: 65px; }
+    nav ul { padding: 0 3%; }
+    nav ul li { font-size: 13px; }
+
+    .first-section {
+        padding: 0.75rem 1rem 1.5rem 1rem;
+    }
+}
