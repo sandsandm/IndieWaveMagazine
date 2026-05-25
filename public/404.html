@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Перенаправление...</title>
+    <script>
+        // Берём путь из URL
+        var path = window.location.pathname;
+
+        // Убираем название репозитория из пути (если нужно)
+        var repoName = '/Indie-Wave';
+        if (path.startsWith(repoName)) {
+            path = path.slice(repoName.length);
+        }
+
+        // Если путь не пустой и это не index.html
+        if (path && path !== '/' && path !== '/index.html') {
+            // Сохраняем путь в sessionStorage
+            sessionStorage.setItem('redirect', path);
+            // Перенаправляем на index.html
+            window.location.href = repoName + '/index.html';
+        }
+    </script>
+</head>
+<body>
+Перенаправление...
+</body>
+</html>

@@ -8,6 +8,13 @@ const app = createApp(App)           // 6. создаём приложение
 const pinia = createPinia()          // 7. создаём хранилище
 //pinia.use(piniaPersistedstate)       // 8. подключаем плагин к хранилищу
 
+router.isReady().then(() => {
+  const redirect = sessionStorage.getItem('redirect')
+  if (redirect) {
+    sessionStorage.removeItem('redirect')
+    router.push(redirect)
+  }
+})
 app.use(pinia)    //  Pinia
 app.use(router)   // Vue Router
 app.mount('#app')

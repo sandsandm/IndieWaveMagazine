@@ -15,4 +15,13 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  base: '/Indie-Wave-master/',
+  build: {
+    rollupOptions: {
+      input: {
+        main: 'index.html',
+        404: '404.html'
+      }
+    }
+  },
 })
