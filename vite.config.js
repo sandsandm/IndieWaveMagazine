@@ -15,7 +15,7 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
-  base: '/Indie-Wave-master/',
+  base: './',
   build: {
     rollupOptions: {
       input: {
