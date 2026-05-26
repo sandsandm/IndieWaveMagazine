@@ -11,7 +11,7 @@ Indie Wave Magazine — многостраничный сайт музыкаль
 Дизайн типа гранж.
 
 ## Стек
-Vue, Vue Router, Pinia 
+Vue, Vue Router, Pinia
 
 ## Установка и запуск
 

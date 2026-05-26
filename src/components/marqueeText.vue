@@ -61,6 +61,8 @@
   }
 }
 @media (max-width: 1200px) {
-  height: 25px;
+  .under-header {
+    height: 25px;
+  }
 }
 </style>
