@@ -227,8 +227,12 @@ a {
     }
 }
 @media (max-width: 480px) {
-    .main { height: 380px; }
-    .main-top { margin: 8px 12px; }
+    .main {
+        height: 380px;
+    }
+    .main-top {
+        margin: 8px 12px;
+    }
     .main__search {
         width: 165px;
         height: 44px;
@@ -241,10 +245,26 @@ a {
     .login-link > img {
         width: 20px;
     }
-    .main__search-input { font-size: 15px; }
-    .main__search input::placeholder { font-size: 15px; }
-    .main-bottom { margin-top: 25px; text-align: center }
-    .cmore { padding: 30px 15px; }
-    .tags { padding: 40px 15px 50px 15px; }
-    .cmore-section { padding: 40px 0; }
+    .main__search-input {
+        font-size: 15px;
+    }
+    .main__search input::placeholder {
+        font-size: 15px;
+    }
+    .main-bottom {
+        margin-top: 25px;
+        text-align: center
+    }
+    .cmore {
+        padding: 30px 15px;
+        text-align: center;
+
+    }
+    .tags {
+        padding: 40px 15px 50px 15px;
+
+    }
+    .cmore-section {
+        padding: 40px 0;
+    }
 }

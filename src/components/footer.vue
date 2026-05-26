@@ -1,3 +1,58 @@
+
+
+<script setup>
+import { ref } from 'vue'
+
+const modal = ref({
+  isOpen: false,
+  type: '',
+  data: {}
+})
+
+const modalTitle = ref('')
+const modalMessage = ref('')
+const copied = ref(false)
+const copyBtnText = ref('')
+
+function openModal(type, data) {
+  modal.value = { isOpen: true, type, data }
+  copied.value = false
+
+  if (type === 'email') {
+    modalTitle.value = 'Copy email'
+    modalMessage.value = `Copy address ${data.email} to clipboard?`
+    copyBtnText.value = 'Copy'
+  } else if (type === 'social') {
+    modalTitle.value = `Go to ${data.platform}`
+    modalMessage.value = `You are going to external site:\n${data.platform}\n${data.url}`
+    copyBtnText.value = 'Go'
+  }
+}
+
+function closeModal() {
+  modal.value.isOpen = false
+  copied.value = false
+}
+
+function confirmAction() {
+  if (modal.value.type === 'email') {
+    navigator.clipboard.writeText(modal.value.data.email).then(() => {
+      copied.value = true
+      copyBtnText.value = 'Copied!'
+    })
+  } else if (modal.value.type === 'social') {
+    window.open(modal.value.data.url, '_blank')
+    closeModal()
+  }
+}
+
+const socials = [
+  { platform: 'Instagram', url: 'https://instagram.com/indiewavemag' },
+  { platform: 'Telegram', url: 'https://t.me/mxmaesandd' },
+  { platform: 'Spotify', url: 'https://open.spotify.com/user/ullkd3y1pycrsnfgim69npeqq' },
+]
+</script>
+
 <template>
   <footer class="footer">
     <div class="footer__noise"></div>
@@ -14,10 +69,17 @@
 
         <div class="footer__col">
           <h4 class="footer__heading anton">CONTACT</h4>
-          <a href="mailto:hello@indiewavemag.com">hello@indiewavemag.com</a>
-          <a href="#">Instagram</a>
-          <a href="#">Telegram</a>
-          <a href="#">Spotify</a>
+          <a href="mailto:hello@indiewavemag.com" @click.prevent="openModal('email', { email: 'hello@indiewavemag.com' })">
+            hello@indiewavemag.com
+          </a>
+          <button
+            v-for="s in socials"
+            :key="s.platform"
+            class="footer__contact-btn"
+            @click="openModal('social', s)"
+          >
+            {{ s.platform }}
+          </button>
         </div>
 
         <div class="footer__col">
@@ -40,6 +102,33 @@
         <span class="footer__tag anton">independent music / visual noise / editorial culture</span>
       </div>
     </div>
+
+    <Teleport to="body">
+      <Transition name="modal-fade">
+        <div v-if="modal.isOpen" class="modal-overlay" @click.self="closeModal">
+          <div class="modal-container">
+            <div class="modal-header">
+              <h3 class="modal-title">{{ modalTitle }}</h3>
+              <button class="modal-close" @click="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p>{{ modalMessage }}</p>
+            </div>
+            <div class="modal-footer">
+              <button class="modal-btn modal-btn-cancel" @click="closeModal">Cancel</button>
+              <button
+                class="modal-btn modal-btn-confirm"
+                :class="{ 'modal-btn-copied': copied }"
+                @click="confirmAction"
+                :disabled="copied"
+              >
+                {{ copied ? 'Copied!' : copyBtnText }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
   </footer>
 </template>
 
@@ -70,29 +159,6 @@
   color: #ffffff;
 }
 
-.footer__brand {
-  max-width: 760px;
-  margin-bottom: 48px;
-}
-
-.footer__title {
-  margin: 0;
-  font-size: clamp(3rem, 7vw, 6.5rem);
-  line-height: 0.9;
-  letter-spacing: 0.03em;
-  color: #ffffff;
-  text-transform: uppercase;
-  text-shadow: 3px 3px 0 rgba(228, 108, 86, 0.35);
-}
-
-.footer__subtitle {
-  max-width: 560px;
-  margin: 18px 0 0;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 18px;
-  line-height: 1.65;
-}
-
 .footer__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -111,7 +177,7 @@
 .footer__heading {
   margin: 0 0 6px;
   color: #e46c56;
-  font-size: 15px;
+  font-size: 19px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
@@ -135,26 +201,23 @@
   line-height: 1.65;
 }
 
-.footer__btn {
-  width: fit-content;
-  margin-top: 6px;
-  padding: 14px 22px;
-  border: 2px solid #e46c56;
-  background: transparent;
-  color: #ffffff;
+.footer__contact-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.88);
   font-family: "IBM Plex Sans", sans-serif;
-  font-size: 14px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 16px;
   cursor: pointer;
+  padding: 0;
+  text-align: left;
   transition: 0.25s ease;
+  width: fit-content;
 }
 
-.footer__btn:hover {
-  background: #e46c56;
-  color: #1d1e34;
+.footer__contact-btn:hover {
+  color: #E46C56;
+  transform: translateX(4px);
 }
-
 .footer__bottom {
   display: flex;
   justify-content: space-between;
@@ -168,23 +231,6 @@
 
 .footer__tag {
   color: #ffffff;
-}
-
-.ibm-plex-sans {
-  font-family: "IBM Plex Sans", sans-serif;
-}
-
-.roboto {
-  font-family: Roboto, sans-serif;
-}
-
-.anton {
-  font-family: Anton, sans-serif;
-  letter-spacing: 0.08em;
-}
-
-.tilt-warp {
-  font-family: "Tilt Warp", sans-serif;
 }
 
 @media (max-width: 1100px) {
@@ -208,6 +254,173 @@
 
   .footer__title {
     transform: none;
+  }
+}
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-container {
+  background: #1d1e34;
+  border-radius: 16px;
+  max-width: 440px;
+  width: 90%;
+  padding: 28px 32px;
+  color: #fff;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #E46C56;
+  font-family: Anton, sans-serif;
+  letter-spacing: 0.06em;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: #E46C56;
+}
+
+.modal-body {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  word-break: break-word;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.modal-btn {
+  padding: 10px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  transition: all 0.2s;
+}
+
+.modal-btn-cancel {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.modal-btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.modal-btn-confirm {
+  background: #E46C56;
+  color: #fff;
+}
+
+.modal-btn-confirm:hover {
+  background: #c94a35;
+}
+
+.modal-btn-copied {
+  background: #2ecc71 !important;
+  cursor: default;
+}
+
+/* Анимация */
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.25s ease;
+}
+
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
+
+/* ===== АДАПТИВ МОДАЛКИ ===== */
+@media (max-width: 600px) {
+  .modal-container {
+    max-width: 95%;
+    width: 95%;
+    padding: 20px 16px;
+    border-radius: 14px;
+  }
+
+  .modal-title {
+    font-size: 1.2rem;
+  }
+
+  .modal-close {
+    font-size: 24px;
+  }
+
+  .modal-body {
+    font-size: 0.9rem;
+    margin-bottom: 18px;
+  }
+
+  .modal-footer {
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+
+  .modal-btn {
+    width: 100%;
+    padding: 12px;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 380px) {
+  .modal-container {
+    padding: 16px 12px;
+    border-radius: 12px;
+  }
+
+  .modal-title {
+    font-size: 1.1rem;
+  }
+
+  .modal-body {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .modal-btn {
+    padding: 10px;
+    font-size: 14px;
   }
 }
 </style>

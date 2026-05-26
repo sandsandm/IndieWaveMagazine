@@ -75,7 +75,30 @@ const getCoverUrl = (imageName) => {
     max-width: 220px;
   }
 }
+@media (min-width: 1200px) {
 
+  /*MEDIUM*/
+  .article-card--medium {
+    width: 300px;
+    flex-direction: column;
+  }
+  .article-cover--medium {
+    max-width: 290px;
+    height: 270px;
+    border-radius: 35px;
+  }
+  .article-card-content--medium {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    padding: 9px;
+    .article-title {
+      text-align: start;
+    }
+  }
+}
 /*LARGE*/
 /*используется в editors choice only*/
 .article-card--large {
@@ -97,27 +120,6 @@ const getCoverUrl = (imageName) => {
   padding: 9px;
   .article-title {
     text-align: center;
-  }
-}
-/*MEDIUM*/
-.article-card--medium {
-  width: 300px;
-  flex-direction: column;
-}
-.article-cover--medium {
-  max-width: 300px;
-  height: 270px;
-  border-radius: 35px;
-}
-.article-card-content--medium {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: start;
-  padding: 9px;
-  .article-title {
-    text-align: start;
   }
 }
 /*SMALL*/
@@ -236,10 +238,12 @@ const getCoverUrl = (imageName) => {
 
   /* Medium — уменьшаем */
   .article-card--medium {
-    width: 100%;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
   }
   .article-cover--medium {
-    max-width: 100%;
+    max-width: 250px;
     height: 220px;
     border-radius: 24px;
   }
@@ -268,7 +272,6 @@ const getCoverUrl = (imageName) => {
     font-size: 15px;
   }
 
-  /* Small — совсем компактный */
   .article-card--small {
     height: auto;
     min-height: 90px;
@@ -288,9 +291,6 @@ const getCoverUrl = (imageName) => {
     max-width: 180px;
     height: 160px;
     border-radius: 18px;
-  }
-  .article-card--medium {
-    width: 317px;
   }
   .article-cover--medium {
     height: 190px;

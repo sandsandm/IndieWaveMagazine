@@ -9,14 +9,10 @@ import TagChip from '@/components/TagChip.vue'
 const route = useRoute()
 const store = useArticlesStore()
 
-// Функция для правильного пути к изображению (такая же, как в ArticleCard)
-const getImageUrl = (imagePath) => {
-  if (!imagePath) return ''
-  if (imagePath.startsWith('http') || imagePath.startsWith('/IndieWaveMagazine/')) {
-    return imagePath
-  }
+const getCoverUrl = (imageName) => {
+  // Базовый путь из конфига Vite
   const base = import.meta.env.BASE_URL
-  return `${base}${imagePath}`
+  return `${base}covers/${imageName}`
 }
 
 const article = computed(() =>
@@ -34,11 +30,18 @@ const similarArticles = computed(() => {
 const isLiked = computed(() =>
   store.likedIds.includes(Number(route.params.id))
 )
+
+const processedContent = computed(() =>
+  article.content.replaceAll(
+    'src="/articles/',
+    `src="${import.meta.env.BASE_URL}articles/`
+  )
+)
 </script>
 <template>
   <div v-if="article" class="article-detail">
     <section class="first-section gradient">
-      <img :src="getImageUrl(article.coverImage)" class="article-cover" />
+      <img :src="getCoverUrl(article.coverImage)" class="article-cover" />
     </section>
     <section class="article-detail__body">
       <div class="article-detail__meta">
@@ -48,15 +51,13 @@ const isLiked = computed(() =>
       <div class="article-detail__main">
         <div class="article-detail__share ibm-sans-semibold sticky">
           <p class="underline">SHARE</p>
-          <a href="">#facebook</a>
-          <a href="">#twitter</a>
-          <a href="">#instagram</a>
-          <a href="">#telegram</a>
-          <a href="">#whatsApp</a>
-          <a href="">#viber</a>
-          <a href="">#threads</a>
-          <a href="">#pinterest</a>
-          <a href="">#link</a>
+          <a href="https://www.facebook.com/">#facebook</a>
+          <a href="https://x.com/">#twitter</a>
+          <a href="https://www.instagram.com/">#instagram</a>
+          <a href="https://telegram.org/">#telegram</a>
+          <a href="https://web.whatsapp.com/">#whatsApp</a>
+          <a href="https://www.threads.com/?hl=ru">#threads</a>
+          <a href="https://sandsandm.github.io/IndieWaveMagazine/#/article/1">#link</a>
         </div>
 
         <div class="article-detail__content">
