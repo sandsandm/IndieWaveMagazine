@@ -13,68 +13,46 @@ const props = defineProps({
   showCover: { type: Boolean, default: true },
   showGenre: { type: Boolean, default: true },
   showDate: { type: Boolean, default: true },
-  showPreview: { type: Boolean, default: true },
   showTags: { type: Boolean, default: true },
   showAuthor: { type: Boolean, default: false },
   showPreview: { type: Boolean, default: false },
 })
 
-// Функция для правильного пути к изображению
-const getImageUrl = (imagePath) => {
-  if (!imagePath) return ''
-
-  // Если это полный URL или уже правильный путь
-  if (imagePath.startsWith('http') || imagePath.startsWith('/IndieWaveMagazine/')) {
-    return imagePath
-  }
-
-  const base = import.meta.env.BASE_URL
-
-  // Пробуем разные варианты путей
-  const possiblePaths = [
-    `${base}${imagePath}`,           // прямой путь
-    `${base}covers/${imagePath}`,    // в папке covers
-    `${base}images/${imagePath}`,    // в папке images
-    `${base}assets/${imagePath}`,    // в папке assets
-  ]
-
-  // Возвращаем первый путь (браузер сам попробует остальные при ошибке)
-  return possiblePaths[0]
-}
+const getCoverUrl = (imageName) => {
+  // Базовый путь из конфига Vite
+  const base = import.meta.env.BASE_URL;
+  return `${base}covers/${imageName}`;
+};
 </script>
 
 <template>
   <router-link :to="`/article/${article.id}`" class="article-card-link">
-  <div :class="['article-card', `article-card--${size}`]">
-  <!-- Обложка -->
-    <img
-      v-if="showCover && (article.coverImage || article.image || article.cover)"
-      :src="getImageUrl(article.coverImage || article.image || article.cover)"
-      :alt="article.title"
-      :class="['article-cover', `article-cover--${size}`]"
-    />
-    <div :class="['article-card', `article-card-content--${size}`]">
-      <p
-        v-if="showGenre"
-        class="article-genre ibm-sans-bold">
-        {{ article.genre }}
-      </p>
-      <p class="article-title ibm-sans-bold">
-        <router-link :to="`/article/${article.id}`">
-          {{ article.title}}
-        </router-link>
-      </p>
-      <span v-if="showPreview"
-          class="article-preview ibm-sans-bold">
-        {{ article.previewText }}
-      </span>
-      <span
-        v-if="showDate"
-        class="article-date ibm-sans-bold">
-      {{ article.date }}
-    </span>
+    <div :class="['article-card', `article-card--${size}`]">
+      <img
+        v-if="showCover && article.coverImage"
+        :src="getCoverUrl(article.coverImage)"
+        :alt="article.title"
+        :class="['article-cover', `article-cover--${size}`]"
+      />
+
+      <div :class="['article-card-content', `article-card-content--${size}`]">
+        <p v-if="showGenre" class="article-genre ibm-sans-bold">
+          {{ article.genre }}
+        </p>
+
+        <p class="article-title ibm-sans-bold">
+          {{ article.title }}
+        </p>
+
+        <span v-if="showPreview" class="article-preview ibm-sans-bold">
+          {{ article.previewText }}
+        </span>
+
+        <span v-if="showDate" class="article-date ibm-sans-bold">
+          {{ article.date }}
+        </span>
+      </div>
     </div>
-  </div>
   </router-link>
 </template>
 
@@ -86,7 +64,6 @@ const getImageUrl = (imagePath) => {
 }
 .article-card {
   display: flex;
-
 }
 @media (min-width: 1200px) {
   .article-card-link {
@@ -95,7 +72,7 @@ const getImageUrl = (imagePath) => {
 }
 @media (max-width: 1200px) {
   .article-card-link {
-  max-width: 220px;
+    max-width: 220px;
   }
 }
 
@@ -124,10 +101,9 @@ const getImageUrl = (imagePath) => {
 }
 /*MEDIUM*/
 .article-card--medium {
-   width: 300px;
-   flex-direction: column;
-
- }
+  width: 300px;
+  flex-direction: column;
+}
 .article-cover--medium {
   max-width: 300px;
   height: 270px;
@@ -137,7 +113,7 @@ const getImageUrl = (imagePath) => {
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: start  ;
+  align-items: start;
   justify-content: start;
   padding: 9px;
   .article-title {
@@ -152,7 +128,7 @@ const getImageUrl = (imagePath) => {
   flex-direction: row;
   justify-content: start;
 }
-.article-cover--small{
+.article-cover--small {
   max-width: 100px;
   height: 100px;
   border-radius: 20px;
@@ -164,7 +140,6 @@ const getImageUrl = (imagePath) => {
   flex-direction: column;
   align-items: start;
   justify-content: start;
-
 }
 /*FULL*/
 .article-card--full {
@@ -172,7 +147,7 @@ const getImageUrl = (imagePath) => {
   display: flex;
   flex-direction: row;
 }
-.article-cover--full{
+.article-cover--full {
   max-width: 375px;
   height: 345px;
   border-radius: 35px;
@@ -185,7 +160,7 @@ const getImageUrl = (imagePath) => {
   align-items: start;
   justify-content: center;
   .article-genre {
-    color: #BCBCBC;
+    color: #bcbcbc;
     font-size: 36px;
   }
   .article-title {
@@ -198,17 +173,16 @@ const getImageUrl = (imagePath) => {
   }
   .article-date {
     font-size: 24px;
-    color: #BCBCBC;
+    color: #bcbcbc;
   }
-
-
 }
 .article-genre {
   font-size: 16px;
   text-transform: uppercase;
 }
-.article-genre, .article-date {
-  color: #BCBCBC;
+.article-genre,
+.article-date {
+  color: #bcbcbc;
 }
 .article-title {
   font-size: 20px;
@@ -237,9 +211,15 @@ const getImageUrl = (imagePath) => {
   .article-card-content--full .article-title {
     font-size: 44px;
   }
-  .article-card-content--full .article-genre { font-size: 26px; }
-  .article-card-content--full .article-preview { font-size: 20px; }
-  .article-card-content--full .article-date { font-size: 20px; }
+  .article-card-content--full .article-genre {
+    font-size: 26px;
+  }
+  .article-card-content--full .article-preview {
+    font-size: 20px;
+  }
+  .article-card-content--full .article-date {
+    font-size: 20px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -255,7 +235,9 @@ const getImageUrl = (imagePath) => {
   }
 
   /* Medium — уменьшаем */
-  .article-card--medium { width: 100%; }
+  .article-card--medium {
+    width: 100%;
+  }
   .article-cover--medium {
     max-width: 100%;
     height: 220px;
@@ -276,18 +258,26 @@ const getImageUrl = (imagePath) => {
   .article-card-content--full .article-title {
     font-size: 28px;
   }
-  .article-card-content--full .article-genre { font-size: 18px; }
-  .article-card-content--full .article-preview { font-size: 16px; }
-  .article-card-content--full .article-date { font-size: 15px; }
+  .article-card-content--full .article-genre {
+    font-size: 18px;
+  }
+  .article-card-content--full .article-preview {
+    font-size: 16px;
+  }
+  .article-card-content--full .article-date {
+    font-size: 15px;
+  }
 
   /* Small — совсем компактный */
-  .article-card--small { height: auto; min-height: 90px; }
+  .article-card--small {
+    height: auto;
+    min-height: 90px;
+  }
   .article-cover--small {
     max-width: 80px;
     height: 80px;
     border-radius: 14px;
   }
-
 }
 
 @media (max-width: 480px) {
@@ -303,7 +293,8 @@ const getImageUrl = (imagePath) => {
     width: 317px;
   }
   .article-cover--medium {
-    height: 190px; border-radius: 18px;
+    height: 190px;
+    border-radius: 18px;
   }
   .article-card-content--full .article-title {
     font-size: 22px;

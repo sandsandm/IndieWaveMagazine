@@ -14,16 +14,16 @@ import Footer from '@/components/footer.vue'
     <nav>
       <ul class="ibm-mono semiBold">
         <li>
-          <a href=""><RouterLink to="/">MAIN</RouterLink></a>
+          <RouterLink to="/">MAIN</RouterLink>
         </li>
         <li>
-          <a href=""><RouterLink to="/articles">ARTICLES</RouterLink></a>
+          <RouterLink to="/articles">ARTICLES</RouterLink>
         </li>
         <li>
-          <a href=""><RouterLink to="/history">HISTORY</RouterLink></a>
+          <RouterLink to="/history">HISTORY</RouterLink>
         </li>
         <li>
-          <a href=""><RouterLink to="/about">ABOUT</RouterLink></a>
+         <RouterLink to="/about">ABOUT</RouterLink>
         </li>
       </ul>
     </nav>

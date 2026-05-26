@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Перенаправление...</title>
+    <script>
+        (function() {
+            var path = window.location.pathname;
+            var repoName = '/IndieWaveMagazine';
+
+            if (path.startsWith(repoName)) {
+                path = path.slice(repoName.length);
+            }
+
+            if (path && path !== '/' && path !== '/index.html' && !path.includes('.')) {
+                sessionStorage.setItem('redirect', path);
+                window.location.href = repoName + '/index.html';
+            }
+        })();
+    </script>
 </head>
 <body>
-
+<p>Перенаправление...</p>
 </body>
 </html>
