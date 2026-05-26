@@ -17,10 +17,10 @@ Vue, Vue Router, Pinia
 
 ```bash
 # Клонировать репозиторий
-git clone https://github.com/sandsandm/Indie-Wave
+git clone https://github.com/sandsandm/IndieWaveMagazine
 
 # Перейти в папку проекта
-cd indieWave
+cd Indie-Wave-master
 
 # Установить зависимости
 npm install
