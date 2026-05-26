@@ -79,11 +79,7 @@ a {
         background: none;
         border: none;
         a:first-child {
-            img {
-                margin-right: 10px;
-                width: 41px;
-                height: 41px;
-            }
+
         }
     }
 }
@@ -243,7 +239,7 @@ a {
         width: 100%;
     }
     .login-link > img {
-        width: 20px;
+        width: 21px;
     }
     .main__search-input {
         font-size: 15px;

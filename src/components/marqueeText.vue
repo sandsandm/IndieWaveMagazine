@@ -33,6 +33,7 @@
   color: #fff;
   text-transform: uppercase;
 }
+
 .under-header {;
   background-color: #ff4825;
   display: flex;
@@ -42,7 +43,7 @@
   font-family: Roboto, sans-serif;
   font-size: 17px;
   text-transform: uppercase;
-  height: 43px;
+  height: 48px;
   overflow: hidden;
   p {
     margin-right: 10px;
@@ -59,5 +60,7 @@
     transform: translateX(-50%);
   }
 }
-
+@media (max-width: 1200px) {
+  height: 25px;
+}
 </style>

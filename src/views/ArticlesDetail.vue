@@ -41,7 +41,7 @@ const processedContent = computed(() =>
 <template>
   <div v-if="article" class="article-detail">
     <section class="first-section gradient">
-      <img :src="getCoverUrl(article.coverImage)" class="article-cover" />
+      <img :src="getCoverUrl(article.coverImage)" class="article-cover" style="max-width:40%;" />
     </section>
     <section class="article-detail__body">
       <div class="article-detail__meta">

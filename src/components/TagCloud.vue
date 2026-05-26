@@ -36,7 +36,7 @@ const store = useArticlesStore()
       grid-auto-rows: auto;
 
       .tag-chip {
-        font-size: 17px;
+        font-size: 1rem;
         font-weight: bold;
       }
     }

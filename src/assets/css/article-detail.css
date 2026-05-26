@@ -3,6 +3,15 @@
     flex-direction: column;
     justify-content: center;
 }
+@media (max-width: 1200px) {
+
+}
+@media (min-width: 1200px) {
+    .article-cover {
+        max-width: 100%;
+    }
+
+}
 .article-detail__body {
     padding: 70px 35px 30px 85px;
 }
