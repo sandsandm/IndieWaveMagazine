@@ -229,7 +229,6 @@ nav ul li a:hover{
     nav ul li { font-size: 26px; }
 }
 
-/* --- 992px: планшет горизонтально --- */
 @media (max-width: 992px) {
     h1 { font-size: 60px; }
     h2 { font-size: 48px; }
@@ -245,7 +244,6 @@ nav ul li a:hover{
     }
 }
 
-/* --- 768px: планшет вертикально / большой телефон --- */
 @media (max-width: 768px) {
     h1 { font-size: 44px; }
     h2 { font-size: 34px; }
@@ -262,7 +260,6 @@ nav ul li a:hover{
     }
 }
 
-/* --- 480px: телефон --- */
 @media (max-width: 480px) {
     h1 { font-size: 32px; }
     h2 { font-size: 26px; }

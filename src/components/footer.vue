@@ -268,7 +268,7 @@ const socials = [
 }
 
 .modal-container {
-  background: #1d1e34;
+  background: #171815FF;
   border-radius: 16px;
   max-width: 440px;
   width: 90%;
@@ -289,7 +289,7 @@ const socials = [
   margin: 0;
   font-size: 1.4rem;
   color: #E46C56;
-  font-family: Anton, sans-serif;
+  font-family: "IBM Plex Mono", sans-serif;
   letter-spacing: 0.06em;
 }
 
