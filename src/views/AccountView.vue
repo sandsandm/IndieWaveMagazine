@@ -71,6 +71,10 @@ a:hover {
     display: flex;
   justify-content: space-between;
 }
+.account-grid {
+  display: flex;
+  flex-direction: row;
+}
 .orange-btn {
   padding: 5px 15px;
   width: fit-content;
