@@ -9,9 +9,8 @@ const pinia = createPinia()
 pinia.use(piniaPersistedstate)
 
 app.use(pinia)
-app.use(router)          // ← сначала подключаем роутер
+app.use(router)
 
-// Теперь router готов
 router.isReady().then(() => {
   app.mount('#app')      // ← монтируем после готовности
   const redirect = sessionStorage.getItem('redirect')

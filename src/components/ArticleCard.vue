@@ -75,7 +75,7 @@ const getCoverUrl = (imageName) => {
     max-width: 220px;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 830px) {
 
   /*MEDIUM*/
   .article-card--medium {
@@ -194,37 +194,7 @@ const getCoverUrl = (imageName) => {
   text-transform: uppercase;
 }
 
-@media (max-width: 992px) {
-  .article-card--large {
-    width: 300px;
-    height: auto;
-  }
-  .article-cover--large {
-    max-width: 300px;
-    height: 270px;
-  }
-  .article-card--full {
-    width: 100%;
-  }
-  .article-cover--full {
-    max-width: 280px;
-    height: 260px;
-  }
-  .article-card-content--full .article-title {
-    font-size: 44px;
-  }
-  .article-card-content--full .article-genre {
-    font-size: 26px;
-  }
-  .article-card-content--full .article-preview {
-    font-size: 20px;
-  }
-  .article-card-content--full .article-date {
-    font-size: 20px;
-  }
-}
-
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   /* Large — уменьшаем */
   .article-card--large {
     width: 240px;

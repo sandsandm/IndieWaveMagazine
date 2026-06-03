@@ -99,7 +99,7 @@ a {
     margin-top: 20px;
 }
 /*CHOICE*/
-@media (min-width: 1200px) {
+@media (min-width: 920px) {
     .choice {
         padding: 60px 0 115px 0;
     }

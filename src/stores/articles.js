@@ -63,8 +63,6 @@ export const useArticlesStore = defineStore('articles', () => {
   return {
     articles,
     likedIds,
-    reactions,
-    currentLang,
     featuredArticles,
     newArticles,
     popularArticles,
@@ -72,4 +70,10 @@ export const useArticlesStore = defineStore('articles', () => {
     likedArticles,
     toggleLike,
   }
+},
+{
+  persist: {
+    key: 'articles',
+      pick: ['likedIds'],
+  },
 })
