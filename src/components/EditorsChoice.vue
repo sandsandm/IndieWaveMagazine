@@ -69,6 +69,11 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+@media (max-width: 1200px) {
+  .choice__content {
+    padding: 3rem 0;
+  }
+}
 .choice__content {
   display: flex;
   flex-direction: column;

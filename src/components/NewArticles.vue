@@ -25,19 +25,18 @@ const props = defineProps({
 </template>
 
 <style scoped>
+
 .new-articles_articles {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  gap: 3rem;
-  max-width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 3.4rem;
+  width: 100%;
 }
-
-/* Для среднего размера карточек можно уменьшить отступы */
-@media (max-width: 768px) {
+@media (max-width: 555px) {
   .new-articles_articles {
-    gap: 1rem;
+    width: 230px;
+
   }
 }
-
 
 </style>

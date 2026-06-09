@@ -19,6 +19,23 @@ const currentIndex = computed(() => {
   return idx !== -1 ? idx : props.decades.length - 1
 })
 
+// Вычисляем цвет бегунка на основе позиции
+const thumbColor = computed(() => {
+  const index = currentIndex.value
+  const total = props.decades.length - 1
+  const position = index / total // позиция от 0 до 1
+
+  // Градиент: #e46c56 (оранжево-красный) -> #6a7ac8 (сине-фиолетовый)
+  const startColor = { r: 228, g: 108, b: 86 }  // #e46c56
+  const endColor = { r: 106, g: 122, b: 200 }    // #6a7ac8
+
+  const r = Math.round(startColor.r + (endColor.r - startColor.r) * position)
+  const g = Math.round(startColor.g + (endColor.g - startColor.g) * position)
+  const b = Math.round(startColor.b + (endColor.b - startColor.b) * position)
+
+  return `rgb(${r}, ${g}, ${b})`
+})
+
 function onInput(event) {
   const index = Number(event.target.value)
   emit('update:modelValue', props.decades[index])
@@ -77,7 +94,7 @@ function onInput(event) {
 .timeline__slider {
   width: 100%;
   height: 10px;
-  background-image: linear-gradient(90deg, #e46c56, #6a7ac8);
+  background: linear-gradient(90deg, #e46c56, #6a7ac8);
   border-radius: 3px;
   outline: none;
   cursor: pointer;
@@ -89,19 +106,28 @@ function onInput(event) {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: #6a7ac8;
+  background: v-bind(thumbColor);
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: background 0.2s ease;
 }
-
 .timeline__slider::-moz-range-thumb {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  border: 1px solid #6a7ac8;
-  background: #6a7ac8;
+  border: none;
+  background: v-bind(thumbColor);
   cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: background 0.2s ease;
 }
+
+.timeline__slider::-moz-range-track {
+  height: 10px;
+  background: linear-gradient(90deg, #e46c56, #6a7ac8);
+  border-radius: 3px;
+}
+
 @media (max-width: 992px) {
   .timeline__label { font-size: 28px; }
   .timeline__label.active { font-size: 34px; }

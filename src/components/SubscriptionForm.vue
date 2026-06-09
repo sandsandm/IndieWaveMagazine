@@ -68,7 +68,7 @@ div > label {
   font-size: 36px;
   margin: 10px auto;
 }
-@media (max-width: 992px) {
+@media (max-width: 1200px) {
   .subscribe {
     padding: 12vh 12vw 10vh 12vw;
     display: flex;

@@ -12,8 +12,6 @@ export const useArticlesStore = defineStore('articles', () => {
 
   const articles = ref(processedArticles)
   const likedIds = ref([])
-  const reactions = ref([])
-  const currentLang = ref('ru')
 
   const featuredArticles = computed(() =>
     articles.value.filter(a => a.featured)

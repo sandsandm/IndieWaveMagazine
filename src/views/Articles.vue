@@ -25,13 +25,22 @@ watch([searchQuery, selectedTags, dateFrom, dateTo], () => {
 const results = computed(() => {
   let filtered = store.articles
 
-  // фильтр по тексту
+  // Фильтр по тексту
   if (searchQuery.value) {
     const q = searchQuery.value.toLowerCase()
-    filtered = filtered.filter(
-      a =>
-        a.title.toLowerCase().includes(q)
-    )
+
+    filtered = filtered.filter(article => {
+      const titleMatch = article.title.toLowerCase().includes(q)
+
+      let authorMatch = false
+      if (Array.isArray(article.author)) {
+        authorMatch = article.author.some(author => author.toLowerCase().includes(q))
+      } else if (typeof article.author === 'string') {
+        authorMatch = article.author.toLowerCase().includes(q)
+      }
+
+      return titleMatch || authorMatch
+    })
   }
 
   // фильтр по тегам

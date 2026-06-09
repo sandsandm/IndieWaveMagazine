@@ -30,13 +30,15 @@ function logout() {
     <h3 class="roboto">
       Articles you have liked
     </h3>
-    <div v-if="store.likedArticles.length" class="account-grid">
-      <ArticleCard
-        v-for="article in store.likedArticles"
-        :key="article.id"
-        :article="article"
-        size="medium"
-      />
+    <div v-if="store.likedArticles.length" class="account-slider">
+      <div class="account-grid">
+        <ArticleCard
+          v-for="article in store.likedArticles"
+          :key="article.id"
+          :article="article"
+          size="medium"
+        />
+      </div>
     </div>
     <div v-else class="v-else">
       <p class="account-empty roboto">Seems like you haven't like any article yet :(</p>
@@ -74,6 +76,7 @@ a:hover {
 .account-grid {
   display: flex;
   flex-direction: row;
+  overflow: hidden;
 }
 .orange-btn {
   padding: 5px 15px;
@@ -92,5 +95,43 @@ a:hover {
 }
 .orange-btn:active {
   background-color: #6A7AC8;
+}
+
+.account-slider {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  cursor: grab;
+}
+
+.account-slider:active {
+  cursor: grabbing;
+}
+
+.account-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: max-content;
+  padding: 10px 0;
+}
+/* Скрываем скроллбар на WebKit браузерах (опционально) */
+.account-slider::-webkit-scrollbar {
+  height: 6px;
+}
+
+.account-slider::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.account-slider::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.account-slider::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 </style>

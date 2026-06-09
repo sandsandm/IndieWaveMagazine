@@ -70,11 +70,7 @@ const getCoverUrl = (imageName) => {
     width: fit-content;
   }
 }
-@media (max-width: 1200px) {
-  .article-card-link {
-    max-width: 220px;
-  }
-}
+
 @media (min-width: 830px) {
 
   /*MEDIUM*/
@@ -145,12 +141,11 @@ const getCoverUrl = (imageName) => {
 }
 /*FULL*/
 .article-card--full {
-  width: 100%;
   display: flex;
   flex-direction: row;
 }
 .article-cover--full {
-  max-width: 375px;
+ width: 375px;
   height: 345px;
   border-radius: 35px;
   margin: 0 20px 0 0;
@@ -208,43 +203,58 @@ const getCoverUrl = (imageName) => {
 
   /* Medium — уменьшаем */
   .article-card--medium {
-    width: 350px;
+    width: 220px;
     display: flex;
     flex-direction: column;
   }
   .article-cover--medium {
-    max-width: 250px;
     height: 220px;
     border-radius: 24px;
   }
-
   /* Full — переходим в колонку */
   .article-card--full {
-    flex-direction: column;
+    flex-direction: row;
+    max-width: 100%;
+    min-width: 280px;
   }
   .article-cover--full {
-    max-width: 100%;
+    max-width: 280px;
+    min-width: 280px;
     width: 100%;
-    height: 220px;
+    max-height:280px;
     margin: 0 0 14px 0;
     border-radius: 24px;
   }
+  .article-card-content--full {
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+  }
   .article-card-content--full .article-title {
-    font-size: 28px;
+    font-size: 24px;
   }
   .article-card-content--full .article-genre {
     font-size: 18px;
   }
   .article-card-content--full .article-preview {
-    font-size: 16px;
+    font-size: 13px;
+    margin: 10px 0;
   }
   .article-card-content--full .article-date {
     font-size: 15px;
+    margin: 10px 0;
   }
+
 
   .article-card--small {
     height: auto;
     min-height: 90px;
+    .article-title {
+      font-size: 16px;
+    }
+    .article-date {
+      font-size: 10px;
+    }
   }
   .article-cover--small {
     max-width: 80px;
@@ -269,5 +279,30 @@ const getCoverUrl = (imageName) => {
   .article-card-content--full .article-title {
     font-size: 22px;
   }
+  /* Full — переходим в колонку */
+  .article-card--full {
+    flex-direction: column;
+    width: 280px;
+  }
+  .article-cover--full {
+    max-width: 100%;
+    width: 100%;
+    height: 280px;
+    margin: 0 0 14px 0;
+    border-radius: 24px;
+  }
+  .article-card-content--full .article-title {
+    font-size: 28px;
+  }
+  .article-card-content--full .article-genre {
+    font-size: 18px;
+  }
+  .article-card-content--full .article-preview {
+    font-size: 16px;
+  }
+  .article-card-content--full .article-date {
+    font-size: 15px;
+  }
+
 }
 </style>
